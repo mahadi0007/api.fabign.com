@@ -6,6 +6,9 @@ const Axios = require("axios");
 
 const FileUpload = async (data, path, name) => {
   try {
+    if (!fs.existsSync(path)) {
+      fs.mkdirSync(path, { recursive: true });
+    }
     const image = data;
     const extension = image.name.split(".").pop();
 
@@ -102,7 +105,7 @@ const fileUploaderForProduct = async (req, res) => {
 
 const FileUploadOfBaseData = async (data, path, name) => {
   if (!fs.existsSync(path)) {
-    fs.mkdirSync(path);
+    fs.mkdirSync(path, { recursive: true });
   }
   const [, type] = data.split(";")[0].split("/");
   const base64Data = data.replace(/^data:image\/[a-z]+;base64,/, "");
@@ -115,7 +118,7 @@ const FileUploadOfBaseData = async (data, path, name) => {
 
 const FileUploadOfProductBaseData = async (data, path, name, type) => {
   if (!fs.existsSync(path)) {
-    fs.mkdirSync(path);
+    fs.mkdirSync(path, { recursive: true });
   }
   const base64Data = data.replace(/^data:image\/[a-z]+;base64,/, "");
   fs.writeFile(`${path}/${name}.${type}`, base64Data, "base64", (err) => {
@@ -138,7 +141,7 @@ const getBase64FromUrl = async (url) => {
 const uploadFile = async (data, path, productId, index) => {
   try {
     if (!fs.existsSync(path)) {
-      fs.mkdirSync(path);
+      fs.mkdirSync(path, { recursive: true });
     }
     const image = data;
     const extension = image.name.split(".")[1];

@@ -23,6 +23,7 @@ const Index = async (req, res, next) => {
       .skip((page - 1) * parseInt(limit))
       .limit(parseInt(limit))
       .populate("products")
+      .populate("category")
       .exec();
     return subcategory
       ? success(res, "Sub Category Found", {
@@ -100,6 +101,7 @@ const Show = async (req, res, next) => {
       _id: mongoose.Types.ObjectId(req.params.id),
     })
       .populate("products")
+      .populate("category")
       .exec();
     return category
       ? success(res, "Sub Category Found", category)
