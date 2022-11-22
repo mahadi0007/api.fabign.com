@@ -3,12 +3,12 @@ const {
   notFound,
   notModified,
   failure,
-} = require("../../../efgecommerce/common/helper/responseStatus");
-const DeliveryCharge = require("../../../efgecommerce/models/Order/DeliveryCharge");
+} = require("../../../fabignecommerce/common/helper/responseStatus");
+const DeliveryCharge = require("../../../fabignecommerce/models/Order/DeliveryCharge");
 
 const Index = async (req, res, next) => {
   try {
-    let zones = require("../../../efgecommerce/models/zones.json");
+    let zones = require("../../../fabignecommerce/models/zones.json");
     success(res, "Delivery charge calculated", zones);
   } catch (error) {
     return failure(res, error.message, error.stack);

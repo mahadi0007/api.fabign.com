@@ -1,15 +1,14 @@
 const {
   success,
   failure,
-} = require("../../../efgecommerce/common/helper/responseStatus");
+} = require("../../../fabignecommerce/common/helper/responseStatus");
 const SMSTemplate = require("../../../models/sms_template.model");
 const validator = require("../../validators/sms_template.validator");
-const { RedisClient } = require("../../cache");
 
 // Structure of items
 const GetTemplate = async (req, res, next) => {
   try {
-    let templates = require("../../../efgecommerce/models/sms-template.json");
+    let templates = require("../../../fabignecommerce/models/sms-template.json");
     success(res, "Sms Template Structure Found", templates);
   } catch (error) {
     if (error) next(error);
@@ -65,7 +64,6 @@ const Store = async (req, res, next) => {
     });
 
     await newTemplate.save();
-    await RedisClient.flushdb();
 
     res.status(201).json({
       status: true,

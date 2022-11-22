@@ -4,9 +4,9 @@ const {
   failure,
   notModified,
   notFound,
-} = require("../../../efgecommerce/common/helper/responseStatus");
-const Product = require("../../../efgecommerce/models/product/ProductV2");
-const StockHistory = require("../../../efgecommerce/models/product/stockHistory");
+} = require("../../../fabignecommerce/common/helper/responseStatus");
+const Product = require("../../../fabignecommerce/models/product/ProductV2");
+const StockHistory = require("../../../fabignecommerce/models/product/stockHistory");
 
 const Update = async (req, res) => {
   try {

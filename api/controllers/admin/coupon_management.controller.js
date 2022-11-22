@@ -3,7 +3,7 @@ const {
   success,
   failure,
   notFound,
-} = require("../../../efgecommerce/common/helper/responseStatus");
+} = require("../../../fabignecommerce/common/helper/responseStatus");
 const Coupon = require("../../../models/coupon.model");
 
 // Index of Measurement

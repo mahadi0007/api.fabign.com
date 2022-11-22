@@ -1,5 +1,5 @@
 const Axios = require("axios");
-const Order = require("../../../efgecommerce/models/Order/Order");
+const Order = require("../../../fabignecommerce/models/Order/Order");
 
 // Index of cities
 const GetCities = async (req, res, next) => {

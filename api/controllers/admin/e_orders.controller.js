@@ -3,10 +3,10 @@ const {
   failure,
   notFound,
   notModified,
-} = require("../../../efgecommerce/common/helper/responseStatus");
+} = require("../../../fabignecommerce/common/helper/responseStatus");
 const uid = require("uniqid");
-const Order = require("../../../efgecommerce/models/Order/Order");
-const User = require("../../../efgecommerce/models/user/user");
+const Order = require("../../../fabignecommerce/models/Order/Order");
+const User = require("../../../fabignecommerce/models/user/user");
 const mongoose = require("mongoose");
 const moment = require("moment");
 const SMSTemplate = require("../../../models/sms_template.model");

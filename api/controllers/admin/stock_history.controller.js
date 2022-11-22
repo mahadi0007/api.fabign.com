@@ -4,8 +4,8 @@ const {
   failure,
   notModified,
   notFound,
-} = require("../../../efgecommerce/common/helper/responseStatus");
-const StockHistory = require("../../../efgecommerce/models/product/stockHistory");
+} = require("../../../fabignecommerce/common/helper/responseStatus");
+const StockHistory = require("../../../fabignecommerce/models/product/stockHistory");
 const Role = require("../../../models/role.model");
 const Admin = require("../../../models/admin.model");
 

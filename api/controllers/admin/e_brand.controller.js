@@ -4,10 +4,10 @@ const {
   failure,
   notFound,
   notModified,
-} = require("../../../efgecommerce/common/helper/responseStatus");
-const Brand = require("../../../efgecommerce/models/product/Brand");
-const Product = require("../../../efgecommerce/models/product/ProductV2");
-const { FileUpload } = require("../../../efgecommerce/common/helper");
+} = require("../../../fabignecommerce/common/helper/responseStatus");
+const Brand = require("../../../fabignecommerce/models/product/Brand");
+const Product = require("../../../fabignecommerce/models/product/ProductV2");
+const { FileUpload } = require("../../../fabignecommerce/common/helper");
 
 const Index = async (req, res, next) => {
   try {

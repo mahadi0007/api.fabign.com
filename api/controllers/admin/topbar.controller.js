@@ -10,8 +10,7 @@ const {
   success,
   failure,
   notFound,
-} = require("../../../efgecommerce/common/helper/responseStatus");
-const { RedisClient } = require("../../cache");
+} = require("../../../fabignecommerce/common/helper/responseStatus");
 const { UploadFile, HostURL, IsValidURL } = require("../../helpers");
 
 // Index of Topbar
@@ -86,7 +85,6 @@ const Store = async (req, res, next) => {
     });
 
     await newTopbar.save();
-    await RedisClient.flushdb();
 
     res.status(201).json({
       status: true,
@@ -164,8 +162,6 @@ const Update = async (req, res, next) => {
       $set: updateObj,
     }).exec();
 
-    await RedisClient.flushdb();
-
     res.status(201).json({
       status: true,
       message: "Top bar updated",
@@ -217,7 +213,6 @@ const Delete = async (req, res, next) => {
 
     // Delete topbar from database
     await TopBar.findByIdAndDelete(id);
-    await RedisClient.flushdb();
 
     res.status(200).json({
       status: true,

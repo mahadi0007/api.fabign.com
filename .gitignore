@@ -1,4 +1,2 @@
 /node_modules
 /uploads
-DB_URL=mongodb+srv://mamun166009:1118964208@cluster0-lkz2b.mongodb.net/efg_fashion?retryWrites=true&w=majority
-token.txt

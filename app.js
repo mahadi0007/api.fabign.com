@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const RouteV1 = require("./api/routes");
-const EcommerseRoute = require("./efgecommerce/api/index");
+const EcommerseRoute = require("./fabignecommerce/api/index");
 require("dotenv").config();
 
 const cluster = require("cluster");
@@ -54,7 +54,6 @@ if (cluster.isMaster) {
   app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
   app.use(nocache());
 
-  app.use("/static", express.static("static/"));
   app.use("/uploads", express.static("uploads/"));
   app.use(
     "/uploads/category/banner",

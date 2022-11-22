@@ -4,10 +4,10 @@ const {
   notFound,
   notModified,
   success,
-} = require("../../../efgecommerce/common/helper/responseStatus");
-const { FileUpload } = require("../../../efgecommerce/common/helper");
-const Slider = require("../../../efgecommerce/models/Slider/Slider");
-const ERROR_LIST = require("../../../efgecommerce/common/helper/errorList");
+} = require("../../../fabignecommerce/common/helper/responseStatus");
+const { FileUpload } = require("../../../fabignecommerce/common/helper");
+const Slider = require("../../../fabignecommerce/models/Slider/Slider");
+const ERROR_LIST = require("../../../fabignecommerce/common/helper/errorList");
 const fs = require("fs");
 const path = require("path");
 

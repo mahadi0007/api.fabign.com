@@ -4,9 +4,9 @@ const {
   failure,
   notFound,
   notModified,
-} = require("../../../efgecommerce/common/helper/responseStatus");
-const Category = require("../../../efgecommerce/models/product/category");
-const Helper = require("../../../efgecommerce/common/helper/index");
+} = require("../../../fabignecommerce/common/helper/responseStatus");
+const Category = require("../../../fabignecommerce/models/product/category");
+const Helper = require("../../../fabignecommerce/common/helper/index");
 
 const Index = async (req, res, next) => {
   try {

@@ -1,5 +1,5 @@
 const Admin = require("../../../models/admin.model");
-const User = require("../../../efgecommerce/models/user/user");
+const User = require("../../../fabignecommerce/models/user/user");
 const { HostURL } = require("../../helpers");
 
 // Search admin

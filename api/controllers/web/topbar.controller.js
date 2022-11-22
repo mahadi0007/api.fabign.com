@@ -3,7 +3,6 @@ const {
   Paginate,
   PaginateQueryParams,
 } = require("../../helpers/paginate.helpers");
-const { RedisClient } = require("../../cache");
 const { HostURL } = require("../../helpers");
 
 // Index of Topbar

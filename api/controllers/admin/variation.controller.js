@@ -3,11 +3,11 @@ const {
   notFound,
   notModified,
   failure,
-} = require("../../../efgecommerce/common/helper/responseStatus");
-const Variation = require("../../../efgecommerce/models/product/Variation");
+} = require("../../../fabignecommerce/common/helper/responseStatus");
+const Variation = require("../../../fabignecommerce/models/product/Variation");
 const mongoose = require("mongoose");
 const validator = require("validatorjs");
-const ERROR_MESSAGE = require("../../../efgecommerce/common/helper/errorMessage");
+const ERROR_MESSAGE = require("../../../fabignecommerce/common/helper/errorMessage");
 
 const Index = async (req, res, next) => {
   try {

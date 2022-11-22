@@ -6,12 +6,12 @@ const {
   failure,
   notModified,
   notFound,
-} = require("../../../efgecommerce/common/helper/responseStatus");
-const Product = require("../../../efgecommerce/models/product/ProductV2");
-const Variation = require("../../../efgecommerce/models/product/Variation");
-const Category = require("../../../efgecommerce/models/product/category");
-const Brand = require("../../../efgecommerce/models/product/Brand");
-const Helper = require("../../../efgecommerce/common/helper/index");
+} = require("../../../fabignecommerce/common/helper/responseStatus");
+const Product = require("../../../fabignecommerce/models/product/ProductV2");
+const Variation = require("../../../fabignecommerce/models/product/Variation");
+const Category = require("../../../fabignecommerce/models/product/category");
+const Brand = require("../../../fabignecommerce/models/product/Brand");
+const Helper = require("../../../fabignecommerce/common/helper/index");
 
 const Index = async (req, res, next) => {
   try {

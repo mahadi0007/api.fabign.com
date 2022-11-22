@@ -4,14 +4,13 @@ const {
   failure,
   notModified,
   notFound,
-} = require("../../../efgecommerce/common/helper/responseStatus");
-const StockReason = require("../../../efgecommerce/models/product/stockReason");
+} = require("../../../fabignecommerce/common/helper/responseStatus");
+const StockReason = require("../../../fabignecommerce/models/product/stockReason");
 const {
   Paginate,
   PaginateQueryParams,
 } = require("../../helpers/paginate.helpers");
 const validator = require("../../validators/stock_reason.validator");
-const { RedisClient } = require("../../cache");
 
 // List of items
 const Index = async (req, res, next) => {
@@ -70,7 +69,6 @@ const Store = async (req, res, next) => {
     });
 
     await newStockReason.save();
-    await RedisClient.flushdb();
 
     res.status(201).json({
       status: true,

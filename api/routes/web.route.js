@@ -1,6 +1,6 @@
 const express = require("express");
 const WebRouter = express.Router();
-// const { Customer } = require("../../efgecommerce/common/middleware/Permission");
+// const { Customer } = require("../../fabignecommerce/common/middleware/Permission");
 const TopbarController = require("../controllers/web/topbar.controller");
 const TopbarButtonController = require("../controllers/web/topbar_button.controller");
 const Pathao = require("../controllers/web/pathao.controller");

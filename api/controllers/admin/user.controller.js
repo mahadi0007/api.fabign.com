@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const ExcelJS = require("exceljs");
 const { Readable } = require("stream");
-const User = require("../../../efgecommerce/models/user/user");
+const User = require("../../../fabignecommerce/models/user/user");
 const { UploadFile, IsValidURL } = require("../../helpers");
 const { isMongooseId } = require("../../middleware/checkId.middleware");
 const {
