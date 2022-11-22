@@ -28,31 +28,5 @@
         ]
       }
     ]
-  },
-  {
-    "module": "ODP",
-    "type": [
-      {
-        "name": "Store",
-        "status": [
-          "Unverified",
-          "Approved",
-          "Pending",
-          "Temporary Suspended",
-          "Permanently Suspended"
-        ]
-      },
-      {
-        "name": "Campaign",
-        "status": [
-          "Pending",
-          "Approved",
-          "Disable",
-          "Reject",
-          "Pause",
-          "Blocked"
-        ]
-      }
-    ]
   }
 ]

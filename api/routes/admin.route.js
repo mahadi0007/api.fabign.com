@@ -3,16 +3,7 @@ const AdminRouter = express.Router();
 const DashboardController = require("../controllers/admin/dashboard.controller");
 const AdminController = require("../controllers/admin/admin.controller");
 const UserController = require("../controllers/admin/user.controller");
-const CategoryController = require("../controllers/admin/category.controller");
-const Category2Controller = require("../controllers/admin/category2.controller");
-const SubCategoryController = require("../controllers/admin/sub_category.controller");
-const SubCategory2Controller = require("../controllers/admin/sub_category2.controller");
-const SizeController = require("../controllers/admin/size.controller");
-const SubButtonController = require("../controllers/admin/subbutton.controller");
 const SearchController = require("../controllers/admin/search.controller");
-const MeasurementsController = require("../controllers/admin/measurements.controller");
-const Measurements2Controller = require("../controllers/admin/measurements2.controller");
-const MeasurementProfiles = require("../controllers/admin/profile.controller");
 const TopbarController = require("../controllers/admin/topbar.controller");
 const TopbarButtonController = require("../controllers/admin/topbar_button.controller");
 const ECatergoryController = require("../controllers/admin/e_category.controller");
@@ -29,13 +20,9 @@ const VariationController = require("../controllers/admin/variation.controller")
 const ShippingChargeController = require("../controllers/admin/shipping_charge.controller");
 const ReportController = require("../controllers/admin/report.controller");
 const StockManagementController = require("../controllers/admin/stock_management.controller");
-const PromotionManagementController = require("../controllers/admin/promotion_management.controller");
-const PromoTutorialManageController = require("../controllers/admin/promo_tutorial_manage.controller");
 const CouponManageController = require("../controllers/admin/coupon_management.controller");
-const PayoutInfoController = require("../controllers/admin/payout_info.controller");
 const PathaoController = require("../controllers/web/pathao.controller");
 const SMSTemplateController = require("../controllers/admin/sms-template.controller");
-const PaymentRequestController = require("../controllers/admin/payment_request.controller");
 const StockHistoryController = require("../controllers/admin/stock_history.controller");
 const StockReasonController = require("../controllers/admin/stock_reason.controller");
 
@@ -56,77 +43,9 @@ AdminRouter.get("/user/:id", UserController.Show);
 AdminRouter.put("/user/:id", UserController.Update);
 AdminRouter.delete("/user/:id", UserController.Delete);
 
-// Category routes
-AdminRouter.get("/category", CategoryController.Index);
-AdminRouter.post("/category", CategoryController.Store);
-AdminRouter.get("/category/:id", CategoryController.Show);
-AdminRouter.delete("/category/:id", CategoryController.Delete);
-
-// Category2 routes
-AdminRouter.get("/category2", Category2Controller.Index);
-AdminRouter.post("/category2", Category2Controller.Store);
-AdminRouter.get("/category2/:id", Category2Controller.Show);
-AdminRouter.put("/category2/:id", Category2Controller.Update);
-AdminRouter.delete("/category2/:id", Category2Controller.Delete);
-
-// Sub-category routes
-AdminRouter.get("/sub-category", SubCategoryController.Index);
-AdminRouter.post("/sub-category", SubCategoryController.Store);
-AdminRouter.get("/sub-category/:id", SubCategoryController.Show);
-AdminRouter.delete("/sub-category/:id", SubCategoryController.Delete);
-
-AdminRouter.get("/sub-category2", SubCategory2Controller.Index);
-AdminRouter.post("/sub-category2", SubCategory2Controller.Store);
-AdminRouter.get("/sub-category2/:id", SubCategory2Controller.Show);
-AdminRouter.put("/sub-category2/:id", SubCategory2Controller.Update);
-AdminRouter.delete("/sub-category2/:id", SubCategory2Controller.Delete);
-
-// Size routes
-AdminRouter.get("/size", SizeController.Index);
-AdminRouter.post("/size", SizeController.Store);
-AdminRouter.get("/size/:id", SizeController.Show);
-AdminRouter.put("/size/:id", SizeController.Update);
-
-// Measurements route
-AdminRouter.get("/measurement", MeasurementsController.Index);
-AdminRouter.post("/measurement", MeasurementsController.Store);
-AdminRouter.get("/measurement/:id", MeasurementsController.Show);
-AdminRouter.delete("/measurement/:id", MeasurementsController.Delete);
-
-AdminRouter.get("/measurement2", Measurements2Controller.Index);
-AdminRouter.post("/measurement2", Measurements2Controller.Store);
-AdminRouter.get("/measurement2/:id", Measurements2Controller.Show);
-AdminRouter.put("/measurement2/:id", Measurements2Controller.Update);
-AdminRouter.delete("/measurement2/:id", Measurements2Controller.Delete);
-
-// Measurement Profile Route
-AdminRouter.get("/profile", MeasurementProfiles.Index);
-AdminRouter.get("/profile/:id", MeasurementProfiles.Show);
-AdminRouter.delete("/profile/:id", MeasurementProfiles.Delete);
-
-// Sub Button route
-AdminRouter.get("/sub-button", SubButtonController.Index);
-AdminRouter.get(
-  "/sub-button/make-default/:id/:category/:subcategory",
-  SubButtonController.MakeDefault
-);
-
 // Search routes
 AdminRouter.get("/search/admin", SearchController.AdminSearch);
 AdminRouter.get("/search/user", SearchController.UserSearch);
-AdminRouter.get("/search/category", SearchController.CategorySearch);
-AdminRouter.get("/search/category2", SearchController.Category2Search);
-AdminRouter.get("/search/sub-category", SearchController.SubCategorySearch);
-AdminRouter.get("/search/sub-category2", SearchController.SubCategory2Search);
-AdminRouter.get("/search/leaf-category", SearchController.LeafCategorySearch);
-AdminRouter.get("/search/element", SearchController.ElementSearch);
-AdminRouter.get("/search/element2", SearchController.Element2Search);
-AdminRouter.get("/search/size", SearchController.SizeSearch);
-AdminRouter.get("/search/fabric", SearchController.FabricSearch);
-AdminRouter.get("/search/fabric2", SearchController.Fabric2Search);
-AdminRouter.get("/search/color", SearchController.ColorSearch);
-AdminRouter.get("/search/type", SearchController.TypeSearch);
-AdminRouter.get("/search/quality", SearchController.QualitySearch);
 
 // Topbar router
 AdminRouter.get("/topbar", TopbarController.Index);
@@ -238,33 +157,6 @@ AdminRouter.get("/report", ReportController.Index);
 // Stock Management routes
 AdminRouter.put("/stock-management", StockManagementController.Update);
 
-// Promotion Management routes
-AdminRouter.get("/promotion-management", PromotionManagementController.Index);
-AdminRouter.put(
-  "/promotion-management/:id",
-  PromotionManagementController.Update
-);
-AdminRouter.delete(
-  "/promotion-management/delete/:id",
-  PromotionManagementController.Delete
-);
-
-// Promotion Tutorial Manage routes
-AdminRouter.get("/promo-tutorial-manage", PromoTutorialManageController.Index);
-AdminRouter.get(
-  "/promo-tutorial-manage/:id",
-  PromoTutorialManageController.Show
-);
-AdminRouter.put(
-  "/promo-tutorial-manage/:id",
-  PromoTutorialManageController.Update
-);
-
-// Promotion Tutorial Manage routes
-AdminRouter.get("/payout-info", PayoutInfoController.Index);
-AdminRouter.get("/payout-info/:id", PayoutInfoController.Show);
-AdminRouter.put("/payout-info/:id", PayoutInfoController.Update);
-
 // Coupon Management routes
 AdminRouter.get("/coupon-management", CouponManageController.Index);
 AdminRouter.post("/coupon-management", CouponManageController.Store);
@@ -287,11 +179,6 @@ AdminRouter.get("/sms-template", SMSTemplateController.Index);
 AdminRouter.post("/sms-template", SMSTemplateController.Store);
 AdminRouter.get("/sms-template/:id", SMSTemplateController.Show);
 AdminRouter.put("/sms-template/:id", SMSTemplateController.Update);
-
-// Payment Request routes
-AdminRouter.get("/payment-request", PaymentRequestController.Index);
-AdminRouter.get("/payment-request/:id", PaymentRequestController.Show);
-AdminRouter.put("/payment-request/:id", PaymentRequestController.Update);
 
 // Stock History routes
 AdminRouter.get("/stock-history/role", StockHistoryController.RoleIndex);

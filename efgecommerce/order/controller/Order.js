@@ -5,9 +5,6 @@ const {
   notModified,
 } = require("../../common/helper/responseStatus");
 const Order = require("../../models/Order/Order");
-const ODPOrder = require("../../models/ODP/Order");
-const StudioProductOrder = require("../../models/Studio/ProductOrder");
-const StudioSampleOrder = require("../../models/Studio/SampleOrder");
 const uid = require("uniqid");
 const mongoose = require("mongoose");
 const moment = require("moment");
@@ -35,9 +32,6 @@ class OrderController {
         isCouponApplied,
         coupon,
         products,
-        odpproducts,
-        studioProducts,
-        studioSampleFabric,
         amountPaid,
         orderStatus,
       } = req.body;
@@ -99,17 +93,11 @@ class OrderController {
           cancel_url: `${process.env.BASE_URL}api/v1/e-efg/order/cancelSSLPayment`,
           ipn_url: `${process.env.BASE_URL}api/v1/e-efg/order/notificationSSLPayment`,
           shipping_method: "No",
-          products: [
-            products.length > 0 && products,
-            odpproducts.length > 0 && odpproducts,
-          ],
+          products: [products.length > 0 && products],
           product_name:
-            (products?.length > 0
+            products?.length > 0
               ? products.map((i) => i.productName).join(", ")
-              : "") +
-            (odpproducts?.length > 0
-              ? odpproducts.map((i) => i.productName).join(", ")
-              : ""),
+              : "",
           product_category: "Tailoring",
           product_profile: "general",
           cus_name: name,
@@ -125,9 +113,6 @@ class OrderController {
         sslcz.init(data).then(async (apiResponse) => {
           // Redirect the user to payment gateway
           let order;
-          let odpOrder;
-          let studioProductOrder;
-          let studioSampleOrder;
           if (products.length > 0) {
             const orderData = new Order({
               orderId: orderId,
@@ -149,122 +134,11 @@ class OrderController {
             });
             order = await orderData.save();
           }
-          if (odpproducts.length > 0) {
-            if (Array.isArray(odpproducts)) {
-              await Promise.all(
-                odpproducts.map(async (element, index) => {
-                  if (
-                    element.front &&
-                    element.back &&
-                    element.left &&
-                    element.right
-                  ) {
-                    const front = await Helper.FileUploadOfBaseData(
-                      element.front,
-                      `./uploads/order/odp_order`,
-                      Date.now()
-                    );
-                    const back = await Helper.FileUploadOfBaseData(
-                      element.back,
-                      `./uploads/order/odp_order`,
-                      Date.now()
-                    );
-                    const left = await Helper.FileUploadOfBaseData(
-                      element.left,
-                      `./uploads/order/odp_order`,
-                      Date.now()
-                    );
-                    const right = await Helper.FileUploadOfBaseData(
-                      element.right,
-                      `./uploads/order/odp_order`,
-                      Date.now()
-                    );
-                    odpproducts[index].front = front;
-                    odpproducts[index].back = back;
-                    odpproducts[index].left = left;
-                    odpproducts[index].right = right;
-                  }
-                })
-              );
-            }
-            const orderData = new ODPOrder({
-              orderId: orderId,
-              user: req.user.id,
-              name,
-              email,
-              orderDate,
-              phone,
-              deliveryAddress,
-              postCode,
-              deliveryCharge: deliveryCharge,
-              paymentMethod,
-              products: odpproducts,
-              subTotalPrice: subTotalPrice,
-              totalPrice: totalPrice,
-              isCouponApplied: isCouponApplied,
-              transactionId,
-              orderStatus,
-            });
-            odpOrder = await orderData.save();
-          }
-          if (studioProducts.length > 0) {
-            if (Array.isArray(studioProducts)) {
-              await Promise.all(
-                studioProducts.map(async (element, index) => {
-                  const image = await Helper.FileUploadOfBaseData(
-                    element.image,
-                    `./uploads/order/studio_order`,
-                    Date.now()
-                  );
-                  studioProducts[index].image = image;
-                })
-              );
-            }
-            const orderData = new StudioProductOrder({
-              orderId: orderId,
-              user: req.user.id,
-              name,
-              email,
-              orderDate,
-              phone,
-              deliveryAddress,
-              postCode,
-              deliveryCharge: deliveryCharge,
-              paymentMethod,
-              products: studioProducts,
-              subTotalPrice: subTotalPrice,
-              totalPrice: totalPrice,
-              orderStatus,
-            });
-            studioProductOrder = await orderData.save();
-          }
-          if (studioSampleFabric.length > 0) {
-            const orderData = new StudioSampleOrder({
-              orderId: orderId,
-              user: req.user.id,
-              name,
-              email,
-              orderDate,
-              phone,
-              deliveryAddress,
-              postCode,
-              deliveryCharge: deliveryCharge,
-              paymentMethod,
-              products: studioSampleFabric,
-              subTotalPrice: subTotalPrice,
-              totalPrice: totalPrice,
-              orderStatus,
-            });
-            studioSampleOrder = await orderData.save();
-          }
           let GatewayPageURL = apiResponse.GatewayPageURL;
-          return success(res, GatewayPageURL, { order, odpOrder });
+          return success(res, GatewayPageURL, { order });
         });
       } else {
         let order;
-        let odpOrder;
-        let studioProductOrder;
-        let studioSampleOrder;
         if (products.length > 0) {
           const orderData = new Order({
             orderId: orderId,
@@ -285,118 +159,9 @@ class OrderController {
           });
           order = await orderData.save();
         }
-        if (odpproducts.length > 0) {
-          if (Array.isArray(odpproducts)) {
-            await Promise.all(
-              odpproducts.map(async (element, index) => {
-                if (
-                  element.front &&
-                  element.back &&
-                  element.left &&
-                  element.right
-                ) {
-                  const front = await Helper.FileUploadOfBaseData(
-                    element.front,
-                    `./uploads/order/odp_order`,
-                    Date.now()
-                  );
-                  const back = await Helper.FileUploadOfBaseData(
-                    element.back,
-                    `./uploads/order/odp_order`,
-                    Date.now()
-                  );
-                  const left = await Helper.FileUploadOfBaseData(
-                    element.left,
-                    `./uploads/order/odp_order`,
-                    Date.now()
-                  );
-                  const right = await Helper.FileUploadOfBaseData(
-                    element.right,
-                    `./uploads/order/odp_order`,
-                    Date.now()
-                  );
-                  odpproducts[index].front = front;
-                  odpproducts[index].back = back;
-                  odpproducts[index].left = left;
-                  odpproducts[index].right = right;
-                }
-              })
-            );
-          }
-          const orderData = new ODPOrder({
-            orderId: orderId,
-            user: req.user.id,
-            name,
-            email,
-            orderDate,
-            phone,
-            deliveryAddress,
-            postCode,
-            deliveryCharge: deliveryCharge,
-            paymentMethod,
-            products: odpproducts,
-            subTotalPrice: subTotalPrice,
-            totalPrice: totalPrice,
-            isCouponApplied: isCouponApplied,
-            orderStatus,
-          });
-          odpOrder = await orderData.save();
-        }
-        if (studioProducts.length > 0) {
-          if (Array.isArray(studioProducts)) {
-            await Promise.all(
-              studioProducts.map(async (element, index) => {
-                const image = await Helper.FileUploadOfBaseData(
-                  element.image,
-                  `./uploads/order/studio_order`,
-                  Date.now()
-                );
-                studioProducts[index].image = image;
-              })
-            );
-          }
-          const orderData = new StudioProductOrder({
-            orderId: orderId,
-            user: req.user.id,
-            name,
-            email,
-            orderDate,
-            phone,
-            deliveryAddress,
-            postCode,
-            deliveryCharge: deliveryCharge,
-            paymentMethod,
-            products: studioProducts,
-            subTotalPrice: subTotalPrice,
-            totalPrice: totalPrice,
-            orderStatus,
-          });
-          studioProductOrder = await orderData.save();
-        }
-        if (studioSampleFabric.length > 0) {
-          const orderData = new StudioSampleOrder({
-            orderId: orderId,
-            user: req.user.id,
-            name,
-            email,
-            orderDate,
-            phone,
-            deliveryAddress,
-            postCode,
-            deliveryCharge: deliveryCharge,
-            paymentMethod,
-            products: studioSampleFabric,
-            subTotalPrice: subTotalPrice,
-            totalPrice: totalPrice,
-            orderStatus,
-          });
-          studioSampleOrder = await orderData.save();
-        }
+
         return success(res, "Order placed", {
           order,
-          odpOrder,
-          studioProductOrder,
-          studioSampleOrder,
         });
       }
     } catch (error) {
@@ -496,14 +261,6 @@ class OrderController {
           $set: updateObj,
         }
       );
-      const modifiedODPOrder = await ODPOrder.updateOne(
-        {
-          orderId: id,
-        },
-        {
-          $set: updateObj,
-        }
-      );
       const order = modifiedOrder.matchedCount
         ? await Order.findOne({
             orderId: req.params.id,
@@ -515,15 +272,7 @@ class OrderController {
             })
             .lean({})
         : {};
-      const odpOrder = modifiedODPOrder.matchedCount
-        ? await ODPOrder.findOne({ orderId: req.params.id })
-            .populate({
-              path: "user",
-              select: "name email phone",
-            })
-            .lean({})
-        : {};
-      return success(res, "Successfully Updated Order", { order, odpOrder });
+      return success(res, "Successfully Updated Order", { order });
     } catch (error) {
       console.log("error");
       console.log(error);
@@ -535,13 +284,10 @@ class OrderController {
       let deletedOrder = await Order.deleteOne({
         orderId: req.params.id,
       });
-      let deletedODPOrder = await ODPOrder.deleteOne({
-        orderId: req.params.id,
-      });
-      return deletedOrder.deletedCount || deletedODPOrder.deletedCount
+
+      return deletedOrder.deletedCount
         ? success(res, "Successfully deleted", {
             deletedOrder,
-            deletedODPOrder,
           })
         : notModified(res, "Not deleted", {});
     } catch (error) {
@@ -590,15 +336,6 @@ class OrderController {
             $set: { paymentStatus: "paid" },
           }
         );
-        await ODPOrder.updateOne(
-          {
-            transactionId,
-          },
-          {
-            $set: { paymentStatus: "paid" },
-          }
-        );
-        console.log("currentOrder");
       }
       // return res.redirect(`${process.env.CLIENT_URL}`);
       return res.status(200).json({
@@ -623,9 +360,6 @@ class OrderController {
     await Order.deleteOne({
       transactionId,
     });
-    await ODPOrder.deleteOne({
-      transactionId,
-    });
     // return res.redirect(`${process.env.CLIENT_URL}/cart`);
     return res.status(200).json({
       data: req.body,
@@ -636,9 +370,6 @@ class OrderController {
     console.log("cancelSSLPayment");
     const transactionId = req.body.tran_id;
     await Order.deleteOne({
-      transactionId,
-    });
-    await ODPOrder.deleteOne({
       transactionId,
     });
     // return res.redirect(`${process.env.CLIENT_URL}/cart`);

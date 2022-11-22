@@ -10,13 +10,10 @@ router.get("/", (req, res) => {
 router.use("/products", require("../products/index"));
 router.use("/user", require("../user/index"));
 router.use("/order", require("../order/index"));
-router.use("/odpOrder", require("../odp/index"));
-router.use("/bulkOrder", require("../bulk/index"));
 router.use("/auth", require("../auth/index"));
 router.use("/banner", require("../banner/bannerRoute"));
 router.use("/slider", require("../slider/sliderRoute"));
 router.use("/coupon", require("../coupon/index"));
-router.use("/promoCode", require("../promo-code/index"));
 router.use("/delivery", deliveryRouter);
 router.post("/upload/files/", Admin, Helper.fileUploaderForProduct);
 

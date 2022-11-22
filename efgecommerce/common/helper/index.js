@@ -125,24 +125,6 @@ const FileUploadOfProductBaseData = async (data, path, name, type) => {
   return `${path.split(".")[1]}/${name}.${type}`;
 };
 
-const FileUploadForBulkOrder = async (data, path, name) => {
-  try {
-    if (!fs.existsSync(path)) {
-      fs.mkdirSync(path);
-    }
-    const image = data;
-    const extension = image.name.split(".")[1];
-
-    const newName = name + "." + extension;
-    const uploadPath = path + "/" + newName;
-
-    const moveFile = image.mv(uploadPath);
-    if (moveFile) return uploadPath;
-  } catch (error) {
-    if (error) return error;
-  }
-};
-
 const getBase64FromUrl = async (url) => {
   let data;
   await Axios.get(url, {
@@ -176,7 +158,6 @@ const Helper = {
   fileUploaderForProduct,
   FileUploadOfBaseData,
   FileUploadOfProductBaseData,
-  FileUploadForBulkOrder,
   getBase64FromUrl,
   uploadFile,
 };
