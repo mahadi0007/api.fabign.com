@@ -5,7 +5,7 @@ const {
   notModified,
   notFound,
 } = require("../../../fabignecommerce/common/helper/responseStatus");
-const Product = require("../../../fabignecommerce/models/product/ProductV2");
+const Product = require("../../../fabignecommerce/models/product/product");
 const StockHistory = require("../../../fabignecommerce/models/product/stockHistory");
 
 const Update = async (req, res) => {

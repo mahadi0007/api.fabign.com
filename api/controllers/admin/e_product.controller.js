@@ -7,7 +7,7 @@ const {
   notModified,
   notFound,
 } = require("../../../fabignecommerce/common/helper/responseStatus");
-const Product = require("../../../fabignecommerce/models/product/ProductV2");
+const Product = require("../../../fabignecommerce/models/product/product");
 const Variation = require("../../../fabignecommerce/models/product/Variation");
 const Category = require("../../../fabignecommerce/models/product/category");
 const Brand = require("../../../fabignecommerce/models/product/Brand");

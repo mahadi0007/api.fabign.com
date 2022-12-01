@@ -1,7 +1,7 @@
 const { failure, success } = require("../../common/helper/responseStatus");
 
 const Rating = require("../../models/product/rating");
-const Product = require("../../models/product/ProductV2");
+const Product = require("../../models/product/product");
 const mongoose = require("mongoose");
 const Helper = require("../../common/helper/index");
 class RatingController {

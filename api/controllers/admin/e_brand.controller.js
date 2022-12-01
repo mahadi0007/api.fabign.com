@@ -6,7 +6,7 @@ const {
   notModified,
 } = require("../../../fabignecommerce/common/helper/responseStatus");
 const Brand = require("../../../fabignecommerce/models/product/Brand");
-const Product = require("../../../fabignecommerce/models/product/ProductV2");
+const Product = require("../../../fabignecommerce/models/product/product");
 const { FileUpload } = require("../../../fabignecommerce/common/helper");
 
 const Index = async (req, res, next) => {

@@ -5,7 +5,7 @@ const {
   notFound,
 } = require("../../../fabignecommerce/common/helper/responseStatus");
 const Rating = require("../../../fabignecommerce/models/product/rating");
-const Product = require("../../../fabignecommerce/models/product/ProductV2");
+const Product = require("../../../fabignecommerce/models/product/product");
 
 const Index = async (req, res, next) => {
   try {

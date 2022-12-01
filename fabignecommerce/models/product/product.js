@@ -1,110 +1,232 @@
-const {Schema, model} = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const productSchema = new Schema({
-    title: {
+  productId: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  banglaName: {
+    type: String,
+  },
+  sku: {
+    type: String,
+    trim: true,
+    default: "",
+  },
+  barcodeType: {
+    type: String,
+    default: "",
+    trim: true,
+  },
+  brand: {
+    type: Schema.Types.ObjectId,
+    ref: "Brand",
+    default: null,
+  },
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: "ItemCategory",
+  },
+  subcategory: {
+    type: Schema.Types.ObjectId,
+    ref: "ItemSubCategory",
+    default: null,
+  },
+  business_locations: [
+    {
+      type: String,
+      default: "",
+      trim: true,
+    },
+  ],
+  manageStock: {
+    type: Boolean,
+    default: false,
+  },
+  alertQuantity: {
+    type: Number,
+  },
+  description: {
+    type: String,
+    default: "",
+  },
+  shortDescription: {
+    type: String,
+    default: "",
+  },
+  margin: {
+    type: Number,
+    default: 0,
+  },
+  sellingPrice: {
+    type: Number,
+    default: 0,
+  },
+  featuredImage: {
+    small: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    large: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+  },
+  galleryImages: [
+    {
+      small: {
         type: String,
-        required: true,
         trim: true,
-        maxlength: 250
+        required: true,
+      },
+      large: {
+        type: String,
+        trim: true,
+        required: true,
+      },
     },
-    banglaName:{
-        type: String
+  ],
+  weight: {
+    type: Number,
+    default: null,
+  },
+  length: {
+    type: Number,
+    default: null,
+  },
+  width: {
+    type: Number,
+    default: null,
+  },
+  height: {
+    type: Number,
+    default: null,
+  },
+  customFields: [
+    {
+      label: {
+        type: String,
+        trim: true,
+      },
+      value: {
+        type: String,
+        trim: true,
+      },
     },
-    brand: {
+  ],
+  regularPrice: {
+    type: Number,
+    default: 0,
+  },
+  costPrice: {
+    type: Number,
+    default: 0,
+  },
+  productType: {
+    type: String,
+    default: "",
+  },
+  faq: {
+    type: Boolean,
+    default: false,
+  },
+  additionalInfo: {
+    type: Boolean,
+    default: false,
+  },
+  variation: {
+    parents: [
+      {
         type: Schema.Types.ObjectId,
-        ref: 'Brand',
-        require: true
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    description: {
-        type: String,
-        default: ""
-    },
-    shortDescription: {
-        type: String,
-        default: ""
-    },
-    category: {
-        type: Schema.Types.ObjectId,
-        ref: 'ItemCategory',
-        require: true
-    },
-    tags: [{
-        type: String,
-        required: true,
-        trim: true
-    }],
-    purchasePrice: {
-        type: Number,
-        required: true,
-        trim: true
-    },
-    salePrice: {
-        type: Number,
-        required: true,
-        trim: true
-    }, 
-    discountType: {
-        type: String,
-        trim: true,
-        default: null,
-        enum: [null, 'Flat', 'Percentage']
-    },
-    discountAmount: {
-        type: Number,
-        trim: true,
-        default: null
-    },
-    thumbnail: {
-        small: {
-            type: String,
-            trim: true,
-            required: true
+        ref: "Variation",
+      },
+    ],
+    values: [
+      {
+        sku: {
+          type: String,
+          trim: true,
         },
-        large: {
+        value: {
+          type: String,
+          trim: true,
+          required: true,
+        },
+        margin: {
+          type: Number,
+          trim: true,
+        },
+        sellingPrice: {
+          type: Number,
+          default: 0,
+        },
+        regularPrice: {
+          type: Number,
+          default: 0,
+        },
+        costPrice: {
+          type: Number,
+          default: 0,
+        },
+        images: [
+          {
             type: String,
             trim: true,
-            required: true
-        }
+          },
+        ],
+        manageStock: {
+          type: Boolean,
+          default: true,
+        },
+        alertAmount: {
+          type: Number,
+          default: 0,
+        },
+        stockAmount: {
+          type: Number,
+          default: 0,
+        },
+      },
+    ],
+  },
+  published: {
+    type: Boolean,
+    default: true,
+  },
+  stockAmount: {
+    type: Number,
+    default: 0,
+  },
+  ratingReview: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "RatingReview",
+      default: [],
     },
-    secondImage: {
-        type: String,
-        trim: true,
-        default: ""
+  ],
+  avgRating: {
+    type: Number,
+    default: 0,
+    enum: [0, 1, 2, 3, 4, 5],
+  },
+  ratingCount: {
+    type: Number,
+    default: 0,
+  },
+  stockHistory: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "StockHistory",
+      default: [],
     },
-    thirdImage: {
-        type: String,
-        trim: true,
-        default: ""
-    },
-    fourthImage: {
-        type: String,
-        trim: true,
-        default: ""
-    },
-    createdBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'Admin',
-        default: null
-    },
-    updatedBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'Admin',
-        default: null
-    },
-    ratingReview: [{
-        type: Schema.Types.ObjectId,
-        ref: 'RatingReview',
-        default: []
-    }],
-    avgRating: {
-        type: Number,
-        default: 0,
-        enum: [0, 1, 2, 3, 4, 5]
-    }
+  ],
 });
 
-module.exports = model('Product', productSchema, "products");
+module.exports = model("Product", productSchema, "products");
